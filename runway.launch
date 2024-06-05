@@ -1,0 +1,14 @@
+<launch>
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <arg name="gui" default="true"/>
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find iq_sim)/worlds/runway2.world"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <!-- more default parameters can be changed here -->
+    <arg name="verbose" default="true"/>
+    
+  </include>
+
+ <node pkg="tf2_ros" type="static_transform_publisher" name="depth_camera_link_broadcaster" args="0.06 0 0.15 0 0 0 base_link depth_camera_link" />
+ <node pkg="tf2_ros" type="static_transform_publisher" name="front_depth_camera_link_broadcaster" args="0.06 0 0 0 1.57 0 base_link down_depth_camera_link" />
+</launch>
